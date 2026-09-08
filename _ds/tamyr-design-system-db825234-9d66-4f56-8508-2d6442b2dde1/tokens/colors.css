@@ -1,0 +1,68 @@
+:root{
+  /* --- primitives --- */
+  --ink-950:#12140F;
+  --ink-900:#1B1D16;
+  --ink-800:#262920;
+  --ink-700:#3A3D33;
+  --ink-500:#6B6E5F;
+  --ink-300:#A8AB98;
+  --ink-150:#D8D9CB;
+  --ink-100:#E4E4D8;
+  --cream-700:#E7E1D2;
+  --cream-500:#F4F0E7;
+  --cream-300:#FAF8F2;
+  --white:#FFFFFF;
+
+  --lime-600:#9FCB14;
+  --lime-500:#BFEE1F;
+  --lime-300:#D8F576;
+  --lime-100:#EFFAC2;
+  --lime-ink:#1B2400;
+
+  --terracotta-600:#A8412C;
+  --terracotta-500:#C4432E;
+  --terracotta-100:#F3DCD3;
+  --amber-600:#C07E1F;
+  --amber-500:#E8A23D;
+  --amber-100:#FBE9CC;
+  --blueprint-600:#3C5A75;
+  --blueprint-500:#4A6B8A;
+  --blueprint-100:#DCE5EC;
+  --moss-600:#4F7A1B;
+  --moss-500:#5C8A1F;
+  --moss-100:#E4EFD1;
+
+  /* --- semantic aliases --- */
+  --bg-page:var(--cream-500);
+  --bg-surface:var(--cream-300);
+  --bg-inverse:var(--ink-950);
+  --bg-inverse-raised:var(--ink-900);
+  --surface-card:var(--cream-300);
+  --surface-card-inverse:var(--ink-900);
+  --surface-accent:var(--lime-500);
+  --surface-sunken:var(--cream-700);
+
+  --text-primary:var(--ink-950);
+  --text-secondary:var(--ink-700);
+  --text-muted:var(--ink-500);
+  --text-disabled:var(--ink-300);
+  --text-inverse:var(--cream-300);
+  --text-inverse-muted:var(--ink-300);
+  --text-on-accent:var(--lime-ink);
+
+  --border-hairline:var(--ink-150);
+  --border-hairline-inverse:rgba(244,240,231,0.14);
+  --border-focus:var(--blueprint-500);
+
+  --link:var(--ink-950);
+  --link-hover:var(--moss-600);
+
+  --success:var(--moss-500);
+  --success-bg:var(--moss-100);
+  --warning:var(--amber-600);
+  --warning-bg:var(--amber-100);
+  --danger:var(--terracotta-500);
+  --danger-bg:var(--terracotta-100);
+  --info:var(--blueprint-500);
+  --info-bg:var(--blueprint-100);
+}

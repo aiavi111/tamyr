@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TAMYR — строим будущее Бишкека</title>
+<meta name="description" content="TAMYR — строительство, архитектура и девелопмент в Бишкеке, Кыргызстан. С 2012 года.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23121408'/%3E%3Cpath d='M16 46 L16 22 L32 14 L48 22 L48 46' fill='none' stroke='%23e7ec3f' stroke-width='5' stroke-linejoin='round'/%3E%3C/svg%3E">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/tamyr-design-system-db825234-9d66-4f56-8508-2d6442b2dde1/tokens/fonts.css">
+  <link rel="stylesheet" href="_ds/tamyr-design-system-db825234-9d66-4f56-8508-2d6442b2dde1/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/tamyr-design-system-db825234-9d66-4f56-8508-2d6442b2dde1/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/tamyr-design-system-db825234-9d66-4f56-8508-2d6442b2dde1/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/tamyr-design-system-db825234-9d66-4f56-8508-2d6442b2dde1/tokens/effects.css">
+  <link rel="stylesheet" href="_ds/tamyr-design-system-db825234-9d66-4f56-8508-2d6442b2dde1/styles.css">
+  <script src="_ds/tamyr-design-system-db825234-9d66-4f56-8508-2d6442b2dde1/_ds_bundle.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    html,body{margin:0;background:var(--bg-page);font-family:var(--font-body);color:var(--text-primary);overflow-x:hidden;scroll-behavior:smooth;}
+    a{color:var(--link);}
+    a:hover{color:var(--link-hover);}
+    a:focus-visible, button:focus-visible{outline:2px solid var(--lime-500);outline-offset:3px;border-radius:2px;}
+    .tm-calc-label{font-size:var(--text-body-sm);font-weight:600;color:var(--text-primary);margin-bottom:10px;}
+    .tm-calc-seg{display:flex;gap:8px;flex-wrap:wrap;}
+    .tm-seg-btn{font-family:var(--font-body);font-size:13px;font-weight:600;padding:9px 16px;border-radius:var(--radius-pill);border:1px solid var(--border-hairline);background:var(--bg-surface);color:var(--text-secondary);cursor:pointer;transition:background 0.18s var(--ease-out),color 0.18s var(--ease-out),border-color 0.18s var(--ease-out);}
+    .tm-seg-btn:hover{border-color:var(--ink-500);color:var(--text-primary);}
+    .tm-seg-btn.is-active{background:var(--ink-950);border-color:var(--ink-950);color:var(--cream-300);}
+    .tm-slider-track{position:relative;width:100%;height:6px;border-radius:999px;background:var(--border-hairline);cursor:pointer;margin-top:6px;touch-action:none;}
+    .tm-slider-fill{position:absolute;left:0;top:0;height:100%;border-radius:999px;background:var(--lime-500);pointer-events:none;}
+    .tm-slider-thumb{position:absolute;top:50%;width:20px;height:20px;border-radius:50%;background:var(--lime-500);border:3px solid var(--cream-300);transform:translate(-50%,-50%);box-shadow:0 2px 8px rgba(0,0,0,0.35);pointer-events:none;}
+    .tm-slider-track:focus-visible{outline:2px solid var(--lime-500);outline-offset:4px;}
+    #tm-proj-track{-ms-overflow-style:none;}
+    #tm-proj-track::-webkit-scrollbar{display:none;}
+    .tm-carousel-btn{width:44px;height:44px;border-radius:50%;border:1px solid var(--border-hairline-inverse);background:transparent;color:var(--cream-300);font-size:16px;cursor:pointer;transition:background 0.2s var(--ease-out),border-color 0.2s var(--ease-out);flex-shrink:0;}
+    .tm-carousel-btn:hover{background:var(--ink-900);border-color:var(--ink-500);}
+    .tm-carousel-btn:disabled{opacity:0.35;cursor:default;}
+    .tm-carousel-btn:disabled:hover{background:transparent;border-color:var(--border-hairline-inverse);}
+    @media (max-width:760px){ #tm-calc{grid-template-columns:1fr;} }
+    /* globe.gl positions/transforms the wrapper it puts these in on its
+       own (screen-projecting the 3D lat/lng each frame) — the pin itself
+       just needs to look right, not position itself */
+    /* soft shadow behind the light/lime text that sits on top of photos
+       (hero, process, featured, values, cta) — extra separation
+       from bright sky/glass in the photo behind it, on top of each
+       section's own gradient overlay. Matches by inline color value since
+       these are plain style="" attributes, not classes. */
+    [style*="color:var(--cream-300)"],
+    [style*="color:var(--lime-500)"],
+    [style*="color:var(--ink-300)"],
+    [style*="color:var(--ink-150)"]{
+      text-shadow:0 2px 10px rgba(0,0,0,0.25);
+    }
+    @keyframes tmFadeIn{from{opacity:0}to{opacity:1}}
+    @keyframes tmFadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes tmRule{from{width:0}to{width:100%}}
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto;}
+      *{animation-duration:0.01ms !important;animation-delay:0s !important;transition-duration:0.01ms !important;}
+    }
+    #tm-nav-links a:hover{color:var(--ink-950);}
+    @media (max-width:680px){ #tm-nav-links{display:none !important;} }
+  </style>
+</helmet>
+<header style="position:fixed;top:clamp(12px,2.5vw,22px);left:0;right:0;z-index:200;display:flex;justify-content:center;padding:0 clamp(14px,3vw,24px);pointer-events:none;">
+  <div style="pointer-events:auto;width:100%;max-width:1060px;background:var(--cream-300);border-radius:var(--radius-pill);box-shadow:var(--shadow-lg);display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 8px 8px clamp(18px,3vw,26px);">
+    <a href="#top" style="font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--ink-950);text-decoration:none;flex-shrink:0;">TAMYR</a>
+    <nav id="tm-nav-links" style="display:flex;align-items:center;gap:clamp(16px,2.2vw,28px);">
+      <a href="#projects" style="color:var(--ink-700);text-decoration:none;font-size:14px;font-weight:500;">Проекты</a>
+      <a href="#process" style="color:var(--ink-700);text-decoration:none;font-size:14px;font-weight:500;">Процесс</a>
+      <a href="#whatwedo" style="color:var(--ink-700);text-decoration:none;font-size:14px;font-weight:500;">Услуги</a>
+      <a href="#team" style="color:var(--ink-700);text-decoration:none;font-size:14px;font-weight:500;">О нас</a>
+    </nav>
+    <a href="#cta" style="background:var(--lime-500);color:var(--lime-ink);font-weight:600;font-size:13px;padding:11px 18px;border-radius:var(--radius-pill);text-decoration:none;white-space:nowrap;flex-shrink:0;transition:background 0.2s var(--ease-out);" style-hover="background:var(--lime-600);">Начать проект →</a>
+  </div>
+</header>
+
+<section id="hero" style="position:relative;height:100vh;min-height:640px;overflow:hidden;background:var(--ink-950);">
+  <div ref="{{ heroBgRef }}" style="position:absolute;inset:0;background-image:url('uploads/hero page BG.jpeg');background-size:cover;background-position:center;opacity:0;animation:tmFadeIn 1.6s var(--ease-out) forwards;"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(18,20,15,0.32) 0%, rgba(18,20,15,0.4) 55%, rgba(18,20,15,0.72) 100%);"></div>
+  <div style="position:relative;height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:clamp(96px,10vw,140px) clamp(20px,4vw,48px) clamp(40px,5vw,64px);max-width:var(--content-max);margin:0 auto;box-sizing:border-box;">
+    <div aria-hidden="true"></div>
+    <div>
+      <h1 style="margin:0;font-family:var(--font-display);font-weight:700;font-size:clamp(3.2rem,2.2rem + 7vw,8.5rem);line-height:var(--leading-tight);letter-spacing:var(--tracking-tight);color:var(--cream-300);">
+        <span style="display:block;opacity:0;animation:tmFadeUp 0.9s var(--ease-out) 0.7s forwards;">МЫ СТРОИМ</span>
+        <span style="display:block;opacity:0;color:var(--lime-500);animation:tmFadeUp 0.9s var(--ease-out) 0.95s forwards;">БУДУЩЕЕ</span>
+        <span style="display:block;opacity:0;animation:tmFadeUp 0.9s var(--ease-out) 1.2s forwards;">БИШКЕКА<span style="color:var(--lime-500);">.</span></span>
+      </h1>
+      <div style="height:1px;background:var(--border-hairline-inverse);width:0;margin:28px 0 24px;animation:tmRule 1s var(--ease-out) 1.6s forwards;"></div>
+      <p style="max-width:560px;font-size:var(--text-body-lg);line-height:var(--leading-relaxed);color:var(--cream-300);margin:0 0 32px;opacity:0;animation:tmFadeUp 0.8s var(--ease-out) 1.8s forwards;">Строительство, архитектура и девелопмент, выросшие из города, который мы называем домом.</p>
+      <a href="#featured" style="display:inline-flex;align-items:center;gap:10px;color:var(--lime-500);font-weight:600;font-size:var(--text-body-sm);letter-spacing:var(--tracking-wide);opacity:0;animation:tmFadeUp 0.8s var(--ease-out) 2s forwards;" style-hover="color:var(--lime-300);">СМОТРЕТЬ ПРОЕКТЫ ↓</a>
+    </div>
+    <div aria-hidden="true"></div>
+  </div>
+</section>
+
+
+<section id="numbers" style="background:var(--ink-950);padding:var(--section-pad-y) clamp(20px,4vw,48px);">
+  <div ref="{{ numbersRef }}" style="{{ numbersStyle }}">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:clamp(32px,5vw,48px);">
+      <div>
+        <div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-display-2xl);color:var(--lime-500);line-height:1;">{{ yearsDisplay }}</div>
+        <div style="margin-top:12px;font-size:var(--text-eyebrow);font-weight:600;letter-spacing:var(--tracking-eyebrow);color:var(--ink-300);">ЛЕТ ОПЫТА</div>
+      </div>
+      <div>
+        <div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-display-2xl);color:var(--cream-300);line-height:1;">{{ projectsCountDisplay }}</div>
+        <div style="margin-top:12px;font-size:var(--text-eyebrow);font-weight:600;letter-spacing:var(--tracking-eyebrow);color:var(--ink-300);">ЗАВЕРШЁННЫХ ПРОЕКТОВ</div>
+      </div>
+      <div>
+        <div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-display-2xl);color:var(--cream-300);line-height:1;">{{ directionsDisplay }}</div>
+        <div style="margin-top:12px;font-size:var(--text-eyebrow);font-weight:600;letter-spacing:var(--tracking-eyebrow);color:var(--ink-300);">КЛЮЧЕВЫХ НАПРАВЛЕНИЙ</div>
+      </div>
+      <div>
+        <div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-display-2xl);color:var(--cream-300);line-height:1;">01</div>
+        <div style="margin-top:12px;font-size:var(--text-eyebrow);font-weight:600;letter-spacing:var(--tracking-eyebrow);color:var(--ink-300);">ГОРОД, КОТОРЫЙ МЫ НАЗЫВАЕМ ДОМОМ</div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="intro" style="background:var(--bg-page);padding:var(--section-pad-y) clamp(20px,4vw,48px);scroll-margin-top:88px;">
+  <div ref="{{ introRef }}" style="{{ introStyle }}">
+    <div style="font-family:var(--font-display);font-weight:700;font-size:clamp(4rem,3rem + 6vw,8rem);line-height:1;color:var(--lime-500);">01</div>
+    <div>
+      <h2 style="margin:0 0 24px;font-family:var(--font-display);font-weight:700;font-size:var(--text-display-2xl);line-height:var(--leading-tight);letter-spacing:var(--tracking-tight);color:var(--text-primary);">МЫ СТРОИМ НЕ ПРОСТО ЗДАНИЯ.<br/>МЫ СТРОИМ ТО, ЧЕМ СТАНОВИТСЯ БИШКЕК.</h2>
+      <p style="max-width:640px;font-size:var(--text-body-lg);line-height:var(--leading-relaxed);color:var(--text-secondary);margin:0 0 40px;">От первого котлована до последней детали — мы создаём пространства, которые становятся частью города.</p>
+      <div style="display:flex;align-items:center;gap:14px;">
+        <div style="width:32px;height:1px;background:var(--border-hairline);"></div>
+        <div style="font-size:var(--text-eyebrow);font-weight:600;letter-spacing:var(--tracking-eyebrow);color:var(--text-muted);">ОДИН ГОРОД. МНОГО ИСТОРИЙ.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process" ref="{{ processWrapRef }}" style="position:relative;height:400vh;scroll-margin-top:88px;">
+  <div style="position:sticky;top:0;height:100vh;overflow:hidden;background:var(--ink-950);">
+    <video ref="{{ videoRef }}" muted="{{ true }}" defaultMuted="{{ true }}" playsInline="{{ true }}" preload="auto" poster="uploads/placeholder 3.jpeg" src="uploads/timelapsvideofor animation.mp4" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:var(--ink-950);"></video>
+    <div style="position:absolute;inset:0;background:linear-gradient(90deg, rgba(18,20,15,0.78) 0%, rgba(18,20,15,0.4) 45%, rgba(18,20,15,0.12) 100%);"></div>
+    <div style="position:relative;height:100%;max-width:var(--content-max);margin:0 auto;display:flex;flex-direction:column;justify-content:center;padding:0 clamp(20px,4vw,48px);box-sizing:border-box;">
+      <div style="font-size:var(--text-eyebrow);font-weight:600;letter-spacing:var(--tracking-eyebrow);color:var(--lime-500);margin-bottom:20px;">ПРОЦЕСС</div>
+      <h2 style="margin:0 0 56px;font-family:var(--font-display);font-weight:700;font-size:var(--text-display-2xl);line-height:var(--leading-tight);color:var(--cream-300);max-width:640px;">ОТ КОТЛОВАНА ДО ЛЕНДМАРКА.</h2>
+      <div style="position:relative;min-height:clamp(140px,20vw,220px);max-width:480px;">
+        <sc-for list="{{ processSteps }}" as="step" hint-placeholder-count="4">
+          <div style="{{ step.style }}">
+            <div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-body-sm);color:var(--lime-500);letter-spacing:var(--tracking-wide);margin-bottom:12px;">{{ step.n }} — {{ step.title }}</div>
+            <div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-display-lg);color:var(--cream-300);line-height:var(--leading-snug);">{{ step.desc }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="calculator" style="background:var(--ink-950);padding:var(--section-pad-y) clamp(20px,4vw,48px);scroll-margin-top:88px;">
+  <div style="max-width:min(1120px,100%);margin:0 auto;">
+    <div style="margin-bottom:clamp(28px,4vw,40px);">
+      <div style="font-size:var(--text-eyebrow);font-weight:600;letter-spacing:var(--tracking-eyebrow);color:var(--lime-500);text-transform:uppercase;margin-bottom:12px;">Калькулятор</div>
+      <h2 style="margin:0 0 12px;font-family:var(--font-display);font-weight:700;font-size:var(--text-display-xl);line-height:var(--leading-tight);letter-spacing:var(--tracking-tight);color:var(--cream-300);">Сколько будет стоить ваш объект?</h2>
+      <p style="margin:0;max-width:56ch;font-size:var(--text-body-md);color:var(--ink-150);">Прикидочный расчёт по параметрам ниже — чтобы понимать порядок цифр перед разговором с нами.</p>
+    </div>
+
+    <div id="tm-calc" style="display:grid;grid-template-columns:1.1fr 0.9fr;gap:1px;background:var(--border-hairline);border-radius:var(--radius-lg);overflow:hidden;">
+      <div style="background:var(--bg-card-light,var(--cream-700));padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;gap:28px;">
+
+        <div>
+          <div class="tm-calc-label">Тип объекта</div>
+          <div class="tm-calc-seg" data-group="type">
+            <button type="button" class="tm-seg-btn is-active" data-value="42000" data-label="Жилой">Жилой</button>
+            <button type="button" class="tm-seg-btn" data-value="50000" data-label="Коммерческий">Коммерческий</button>
+            <button type="button" class="tm-seg-btn" data-value="28000" data-label="Промышленный">Промышленный</button>
+          </div>
+        </div>
+
+        <div>
+          <div class="tm-calc-label">Площадь — <span id="tm-calc-area-val">1 500</span> м²</div>
+          <div id="tm-calc-area-track" class="tm-slider-track" role="slider" tabindex="0" aria-label="Площадь, м²" aria-valuemin="150" aria-valuemax="20000" aria-valuenow="1500">
+            <div id="tm-calc-area-fill" class="tm-slider-fill"></div>
+            <div id="tm-calc-area-thumb" class="tm-slider-thumb"></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="tm-calc-label">Этажность</div>
+          <div class="tm-calc-seg" data-group="floors">
+            <button type="button" class="tm-seg-btn is-active" data-value="1" data-label="1–4 этажа">1–4</button>
+            <button type="button" class="tm-seg-btn" data-value="1.08" data-label="5–9 этажей">5–9</button>
+            <button type="button" class="tm-seg-btn" data-value="1.15" data-label="10+ этажей">10+</button>
+          </div>
+        </div>
+
+        <div>
+          <div class="tm-calc-label">Комплектация</div>
+          <div class="tm-calc-seg" data-group="finish">
+            <button type="button" class="tm-seg-btn" data-value="0.65" data-label="Черновая">Черновая</button>
+            <button type="button" class="tm-seg-btn is-active" data-value="1" data-label="Под чистовую">Под чистовую</button>
+            <button type="button" class="tm-seg-btn" data-value="1.35" data-label="Под ключ">Под ключ</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="background:var(--ink-950);color:var(--cream-300);padding:clamp(24px,3vw,40px);display:flex;flex-direction:column;justify-content:space-between;gap:24px;">
+        <div>
+          <div style="font-size:var(--text-eyebrow);letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--ink-300);margin-bottom:14px;">Предварительный расчёт</div>
+          <div id="tm-calc-price" style="font-family:var(--font-display);font-weight:700;font-size:clamp(1.7rem,1.2rem+2.4vw,2.6rem);line-height:1.1;color:var(--lime-500);">—</div>
+          <div id="tm-calc-timeline" style="margin-top:14px;font-size:var(--text-body-md);color:var(--ink-150);">—</div>
+        </div>
+        <div>
+          <p style="margin:0 0 20px;font-size:var(--text-body-sm);color:var(--ink-300);line-height:var(--leading-relaxed);">Точная стоимость и сроки — после выезда на объект и составления сметы. Это ориентир, не коммерческое предложение.</p>
+          <a href="#cta" style="display:inline-flex;align-items:center;gap:10px;background:var(--lime-500);color:var(--lime-ink);font-weight:600;font-size:var(--text-body-sm);letter-spacing:var(--tracking-wide);padding:14px 24px;border-radius:var(--radius-pill);text-decoration:none;transition:background 0.2s var(--ease-out);" style-hover="background:var(--lime-600);">Обсудить проект →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="bridge" style="background:var(--bg-page);padding:var(--section-pad-y) clamp(20px,4vw,48px);">
+  <div ref="{{ bridgeRef }}" style="{{ bridgeStyle }}">
+    <div style="font-family:var(--font-display);font-weight:700;font-size:clamp(4rem,3rem + 6vw,8rem);line-height:1;color:var(--lime-500);">02</div>
+    <div>
+      <h2 style="margin:0 0 24px;font-family:var(--font-display);font-weight:700;font-size:var(--text-display-2xl);line-height:var(--leading-tight);letter-spacing:var(--tracking-tight);color:var(--text-primary);">ЗДЕСЬ ЗАКАНЧИВАЕТСЯ ПЛОЩАДКА.<br/>НАЧИНАЕТСЯ ЗДАНИЕ.</h2>
+      <div style="display:flex;align-items:center;gap:14px;">
+        <div style="width:32px;height:1px;background:var(--border-hairline);"></div>
+        <div style="font-size:var(--text-eyebrow);font-weight:600;letter-spacing:var(--tracking-eyebrow);color:var(--text-muted);">ОТ КОТЛОВАНА — К ЛЕНДМАРКУ.</div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="featured" style="position:relative;min-height:92vh;overflow:hidden;background:var(--ink-950);scroll-margin-top:88px;">
+  <div style="{{ featuredBgStyle }}"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(18,20,15,0.1) 0%, rgba(18,20,15,0.5) 70%, rgba(18,20,15,0.82) 100%);"></div>
+  <div ref="{{ featuredRef }}" style="{{ featuredStyle }}">
+    <div style="font-size:var(--text-eyebrow);font-weight:600;letter-spacing:var(--tracking-eyebrow);color:var(--lime-500);margin-bottom:20px;">01 / ГЛАВНЫЙ ПРОЕКТ</div>
+    <h2 style="margin:0 0 20px;font-family:var(--font-display);font-weight:700;font-size:var(--text-display-2xl);line-height:var(--leading-tight);letter-spacing:var(--tracking-tight);color:var(--cream-300);max-width:720px;">НОВЫЙ ЛЕНДМАРК БИШКЕКА.</h2>
+    <div style="font-size:var(--text-body-md);color:var(--ink-150);letter-spacing:var(--tracking-wide);margin-bottom:32px;">ЖИЛОЙ КОМПЛЕКС · БИШКЕК, КЫРГЫЗСТАН · СДАН В 2026</div>
+    <a href="#projects" style="display:inline-flex;align-items:center;gap:10px;color:var(--cream-300);font-weight:600;font-size:var(--text-body-sm);letter-spacing:var(--tracking-wide);" style-hover="color:var(--lime-500);">СМОТРЕТЬ ПРОЕКТ →</a>
+  </div>
+</section>
+
+<section id="projects" style="background:var(--ink-950);padding:var(--section-pad-y) 0;scroll-margin-top:88px;overflow:hidden;">
+  <div ref="{{ projectsRef }}" style="{{ projectsStyle }}">
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;padding:0 clamp(20px,4vw,48px);margin-bottom:clamp(28px,4vw,40px);">
+      <div>
+        <div style="font-size:var(--text-eyebrow);font-weight:600;letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;color:var(--lime-500);margin-bottom:12px;">Объекты</div>
+        <h2 style="margin:0;font-family:var(--font-display);font-weight:700;font-size:var(--text-display-xl);line-height:var(--leading-tight);letter-spacing:var(--tracking-tight);color:var(--cream-300);max-width:16ch;">НЕСКОЛЬКО ОБЪЕКТОВ</h2>
+      </div>
+      <div style="display:flex;gap:10px;">
+        <button type="button" id="tm-proj-prev" class="tm-carousel-btn" aria-label="Предыдущий проект">←</button>
+        <button type="button" id="tm-proj-next" class="tm-carousel-btn" aria-label="Следующий проект">→</button>
+      </div>
+    </div>
+
+    <div id="tm-proj-track" style="display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px clamp(20px,4vw,48px) 16px;scrollbar-width:none;">
+      <a href="#" class="tm-proj-card" style="flex:0 0 min(440px,82vw);scroll-snap-align:start;text-decoration:none;--imgScale:1;" style-hover="--imgScale:1.05;">
+        <div style="aspect-ratio:4/3;border-radius:var(--radius-lg);overflow:hidden;">
+          <div style="{{ project1PhotoStyle }}"></div>
+        </div>
+        <div style="padding-top:18px;">
+          <div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-display-sm);color:var(--ink-500);margin-bottom:6px;">01</div>
+          <div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-display-md);color:var(--cream-300);margin-bottom:8px;">Многофункциональный комплекс</div>
+          <div style="font-size:var(--text-body-sm);color:var(--ink-300);margin-bottom:10px;">Бишкек · 2025</div>
+          <div style="font-size:var(--text-body-sm);font-weight:600;color:var(--lime-500);letter-spacing:var(--tracking-wide);">СМОТРЕТЬ ПРОЕКТ →</div>
+        </div>
+      </a>
+      <a href="#" class="tm-proj-card" style="flex:0 0 min(440px,82vw);scroll-snap-align:start;text-decoration:none;--imgScale:1;" style-hover="--imgScale:1.05;">
+        <div style="aspect-ratio:4/3;border-radius:var(--radius-lg);overflow:hidden;">
+          <div style="{{ project2PhotoStyle }}"></div>
+        </div>
+        <div style="padding-top:18px;">
+          <div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-display-sm);color:var(--ink-500);margin-bottom:6px;">02</div>
+          <div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-display-md);color:var(--cream-300);margin-bottom:8px;">Жилой комплекс</div>
+          <div style="font-size:var(--text-body-sm);color:var(--ink-300);margin-bottom:10px;">Бишкек · 2026</div>
+          <div style="font-size:var(--text-body-sm);font-weight:600;color:var(--lime-500);letter-spacing:var(--tracking-wide);">СМОТРЕТЬ ПРОЕКТ →</div>
+        </div>
+      </a>
+      <a href="#" class="tm-proj-card" style="flex:0 0 min(440px,82vw);scroll-snap-align:start;text-decoration:none;--imgScale:1;" style-hover="--imgScale:1.05;">
+        <div style="aspect-ratio:4/3;border-radius:var(--radius-lg);overflow:hidden;">
+          <div style="{{ project3PhotoStyle }}"></div>
+        </div>
+        <div style="padding-top:18px;">
+          <div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-display-sm);color:var(--ink-500);margin-bottom:6px;">03</div>
+          <div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-display-md);color:var(--cream-300);margin-bottom:8px;">Жилой квартал «Южный»</div>
+          <div style="font-size:var(--text-body-sm);color:var(--ink-300);margin-bottom:10px;">Бишкек · 2024</div>
+          <div style="font-size:var(--text-body-sm);font-weight:600;color:var(--lime-500);letter-spacing:var(--tracking-wide);">СМОТРЕТЬ ПРОЕКТ →</div>
+        </div>
+      </a>
+      <a href="#" class="tm-proj-card" style="flex:0 0 min(440px,82vw);scroll-snap-align:start;text-decoration:none;--imgScale:1;" style-hover="--imgScale:1.05;">
+        <div style="aspect-ratio:4/3;border-radius:var(--radius-lg);overflow:hidden;">
+          <div style="{{ project4PhotoStyle }}"></div>
+        </div>
+        <div style="padding-top:18px;">
+          <div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-display-sm);color:var(--ink-500);margin-bottom:6px;">04</div>
+          <div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-display-md);color:var(--cream-300);margin-bottom:8px;">Бизнес-центр</div>
+          <div style="font-size:var(--text-body-sm);color:var(--ink-300);margin-bottom:10px;">Бишкек · 2023</div>
+          <div style="font-size:var(--text-body-sm);font-weight:600;color:var(--lime-500);letter-spacing:var(--tracking-wide);">СМОТРЕТЬ ПРОЕКТ →</div>
+        </div>
+      </a>
+      <a href="#" class="tm-proj-card" style="flex:0 0 min(440px,82vw);scroll-snap-align:start;text-decoration:none;--imgScale:1;" style-hover="--imgScale:1.05;">
+        <div style="aspect-ratio:4/3;border-radius:var(--radius-lg);overflow:hidden;">
+          <div style="{{ project5PhotoStyle }}"></div>
+        </div>
+        <div style="padding-top:18px;">
+          <div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-display-sm);color:var(--ink-500);margin-bottom:6px;">05</div>
+          <div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-display-md);color:var(--cream-300);margin-bottom:8px;">Складской комплекс</div>
+          <div style="font-size:var(--text-body-sm);color:var(--ink-300);margin-bottom:10px;">Бишкек · 2022</div>
+          <div style="font-size:var(--text-body-sm);font-weight:600;color:var(--lime-500);letter-spacing:var(--tracking-wide);">СМОТРЕТЬ ПРОЕКТ →</div>
+        </div>
+      </a>
+      <a href="#" class="tm-proj-card" style="flex:0 0 min(440px,82vw);scroll-snap-align:start;text-decoration:none;--imgScale:1;" style-hover="--imgScale:1.05;">
+        <div style="aspect-ratio:4/3;border-radius:var(--radius-lg);overflow:hidden;">
+          <div style="{{ project6PhotoStyle }}"></div>
+        </div>
+        <div style="padding-top:18px;">
+          <div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-display-sm);color:var(--ink-500);margin-bottom:6px;">06</div>
+          <div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-display-md);color:var(--cream-300);margin-bottom:8px;">Офисный центр «Ала-Тоо»</div>
+          <div style="font-size:var(--text-body-sm);color:var(--ink-300);margin-bottom:10px;">Бишкек · 2021</div>
+          <div style="font-size:var(--text-body-sm);font-weight:600;color:var(--lime-500);letter-spacing:var(--tracking-wide);">СМОТРЕТЬ ПРОЕКТ →</div>
+        </div>
+      </a>
+      <a href="#" class="tm-proj-card" style="flex:0 0 min(440px,82vw);scroll-snap-align:start;text-decoration:none;--imgScale:1;" style-hover="--imgScale:1.05;">
+        <div style="aspect-ratio:4/3;border-radius:var(--radius-lg);overflow:hidden;">
+          <div style="{{ project7PhotoStyle }}"></div>
+        </div>
+        <div style="padding-top:18px;">
+          <div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-display-sm);color:var(--ink-500);margin-bottom:6px;">07</div>
+          <div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-display-md);color:var(--cream-300);margin-bottom:8px;">Жилой дом «Северный»</div>
+          <div style="font-size:var(--text-body-sm);color:var(--ink-300);margin-bottom:10px;">Бишкек · 2020</div>
+          <div style="font-size:var(--text-body-sm);font-weight:600;color:var(--lime-500);letter-spacing:var(--tracking-wide);">СМОТРЕТЬ ПРОЕКТ →</div>
+        </div>
+      </a>
+    </div>
+    <div style="text-align:center;padding-top:clamp(8px,2vw,16px);font-size:var(--text-eyebrow);font-weight:600;letter-spacing:var(--tracking-eyebrow);color:var(--ink-300);">8 ПРОЕКТОВ · 1 ГОРОД · 1 СТАНДАРТ</div>
+  </div>
+</section>
+
+
+<section id="interior" style="background:var(--bg-page);padding:var(--section-pad-y) clamp(20px,4vw,48px);">
+  <div ref="{{ interiorRef }}" style="{{ interiorStyle }}">
+    <div style="display:grid;grid-template-columns:minmax(220px,320px) 1fr;gap:clamp(32px,5vw,64px);align-items:center;">
+      <h2 style="margin:0;font-family:var(--font-display);font-weight:700;font-size:var(--text-display-lg);line-height:var(--leading-tight);letter-spacing:var(--tracking-tight);color:var(--text-primary);">КАЧЕСТВО ЖИВЁТ В ДЕТАЛЯХ.</h2>
+      <div style="border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:16/11;">
+        <div style="{{ interiorPhotoStyle }}"></div>
+      </div>
+    </div>
+    <div style="margin-top:clamp(40px,6vw,64px);padding-top:24px;border-top:1px solid var(--border-hairline);font-size:var(--text-eyebrow);font-weight:600;letter-spacing:var(--tracking-eyebrow);color:var(--text-muted);">МАТЕРИАЛЫ / СВЕТ / ПРОСТРАНСТВО / ДЕТАЛЬ</div>
+  </div>
+</section>
+
+<section id="team" style="background:var(--ink-950);padding:var(--section-pad-y) clamp(20px,4vw,48px);scroll-margin-top:88px;">
+  <div ref="{{ teamRef }}" style="{{ teamStyle }}">
+    <div style="width:min(100%,78vw);margin:0 auto;border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:16/9;">
+      <div style="{{ teamPhotoStyle }}"></div>
+    </div>
+    <div style="text-align:center;max-width:640px;margin:40px auto 0;">
+      <h2 style="margin:0 0 16px;font-family:var(--font-display);font-weight:700;font-size:var(--text-display-lg);line-height:var(--leading-tight);letter-spacing:var(--tracking-tight);color:var(--cream-300);">ЛЮДИ, КОТОРЫЕ СТОЯТ ЗА ЗДАНИЯМИ.</h2>
+      <div style="font-size:var(--text-body-sm);font-weight:600;letter-spacing:var(--tracking-wide);color:var(--ink-300);margin-bottom:16px;">АРХИТЕКТОРЫ · ИНЖЕНЕРЫ · РУКОВОДИТЕЛИ ПРОЕКТОВ · СТРОИТЕЛИ</div>
+      <p style="margin:0;font-size:var(--text-body-md);color:var(--ink-150);">Разные специальности. Один стандарт.</p>
+    </div>
+  </div>
+</section>
+<section id="values" style="background:var(--bg-page);padding:var(--section-pad-y) clamp(20px,4vw,48px);">
+  <div ref="{{ valuesRef }}" style="{{ valuesStyle }}">
+    <h2 style="margin:0 0 40px;font-family:var(--font-display);font-weight:700;font-size:var(--text-display-2xl);line-height:var(--leading-tight);letter-spacing:var(--tracking-tight);color:var(--text-primary);text-align:center;">ПОСТРОЕНО НА ТРЁХ ПРИНЦИПАХ.</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(16px,2vw,24px);">
+      <div style="position:relative;border-radius:var(--radius-lg);overflow:hidden;height:60vh;min-height:360px;--imgGray:1;--imgScale:1;" style-hover="--imgGray:0;--imgScale:1.05;">
+        <div style="{{ value1PhotoStyle }}"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(18,20,15,0.1) 40%, rgba(18,20,15,0.75) 100%);"></div>
+        <div style="position:absolute;left:24px;right:24px;bottom:24px;">
+          <div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-body-sm);color:var(--lime-500);margin-bottom:8px;">01 ТОЧНОСТЬ</div>
+          <p style="margin:0;font-size:var(--text-body-md);line-height:var(--leading-relaxed);color:var(--cream-300);">У каждой линии, соединения и материала есть назначение.</p>
+        </div>
+      </div>
+      <div style="position:relative;border-radius:var(--radius-lg);overflow:hidden;height:60vh;min-height:360px;--imgGray:1;--imgScale:1;" style-hover="--imgGray:0;--imgScale:1.05;">
+        <div style="{{ value2PhotoStyle }}"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(18,20,15,0.1) 40%, rgba(18,20,15,0.75) 100%);"></div>
+        <div style="position:absolute;left:24px;right:24px;bottom:24px;">
+          <div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-body-sm);color:var(--lime-500);margin-bottom:8px;">02 МАСТЕРСТВО</div>
+          <p style="margin:0;font-size:var(--text-body-md);line-height:var(--leading-relaxed);color:var(--cream-300);">Качество живёт в деталях, которые не замечают сразу.</p>
+        </div>
+      </div>
+      <div style="position:relative;border-radius:var(--radius-lg);overflow:hidden;height:60vh;min-height:360px;--imgGray:1;--imgScale:1;" style-hover="--imgGray:0;--imgScale:1.05;">
+        <div style="{{ value3PhotoStyle }}"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(18,20,15,0.1) 40%, rgba(18,20,15,0.75) 100%);"></div>
+        <div style="position:absolute;left:24px;right:24px;bottom:24px;">
+          <div style="font-family:var(--font-display);font-weight:700;font-size:var(--text-body-sm);color:var(--lime-500);margin-bottom:8px;">03 ДОЛГОВЕЧНОСТЬ</div>
+          <p style="margin:0;font-size:var(--text-body-md);line-height:var(--leading-relaxed);color:var(--cream-300);">Мы строим на десятилетия, а не для одной фотографии.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="whatwedo" style="background:var(--ink-950);padding:var(--section-pad-y) clamp(20px,4vw,48px);">
+  <div ref="{{ accordionRef }}" style="{{ accordionStyle }}">
+    <sc-for list="{{ accordionData }}" as="item" hint-placeholder-count="4">
+      <div style="border-top:1px solid var(--border-hairline-inverse);">
+        <a href="#" onClick="{{ item.onClick }}" style="display:flex;align-items:center;justify-content:space-between;gap:24px;padding:28px 0;text-decoration:none;cursor:pointer;">
+          <div style="display:flex;align-items:baseline;gap:24px;">
+            <span style="font-family:var(--font-display);font-weight:700;font-size:var(--text-body-md);color:var(--ink-300);">{{ item.n }}</span>
+            <span style="{{ item.titleColorStyle }}">{{ item.title }}</span>
+          </div>
+          <span style="{{ item.iconStyle }}">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+          </span>
+        </a>
+        <sc-if value="{{ item.open }}" hint-placeholder-val="{{ false }}">
+          <div style="display:grid;grid-template-columns:1fr 160px;gap:32px;align-items:center;padding:0 0 32px 44px;animation:tmFadeUp 0.4s var(--ease-out);">
+            <p style="margin:0;font-size:var(--text-body-md);line-height:var(--leading-relaxed);color:var(--ink-150);max-width:520px;">{{ item.desc }}</p>
+            <div style="{{ item.imgStyle }}"></div>
+          </div>
+        </sc-if>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<section id="cta" style="position:relative;min-height:90vh;overflow:hidden;background:var(--ink-950);scroll-margin-top:88px;">
+  <div style="{{ ctaBgStyle }}"></div>
+  <div style="{{ ctaOverlayStyle }}"></div>
+  <div ref="{{ ctaRef }}" style="{{ ctaStyle }}">
+    <h2 style="margin:0;font-family:var(--font-display);font-weight:700;font-size:var(--text-display-2xl);line-height:var(--leading-tight);letter-spacing:var(--tracking-tight);color:var(--cream-300);max-width:820px;">ДАВАЙТЕ ПОСТРОИМ ТО, ЧТО БУДЕТ ДАЛЬШЕ.</h2>
+    <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+      <a href="#" style="display:inline-flex;align-items:center;gap:10px;background:var(--lime-500);color:var(--lime-ink);font-weight:600;font-size:var(--text-body-sm);letter-spacing:var(--tracking-wide);padding:16px 28px;border-radius:var(--radius-pill);text-decoration:none;" style-hover="background:var(--lime-600);">НАЧАТЬ ПРОЕКТ →</a>
+      <div style="font-size:var(--text-body-sm);color:var(--ink-300);letter-spacing:var(--tracking-wide);">Бишкек, Кыргызстан</div>
+    </div>
+  </div>
+</section>
+
+<footer style="background:var(--ink-950);padding:clamp(48px,6vw,80px) clamp(20px,4vw,48px) clamp(32px,4vw,48px);">
+  <div style="max-width:var(--content-max);margin:0 auto;">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:40px;margin-bottom:40px;">
+      <div>
+        <div style="font-family:var(--font-display);font-weight:700;font-size:28px;color:var(--cream-300);margin-bottom:12px;">TAMYR</div>
+        <div style="font-size:var(--text-body-sm);color:var(--ink-300);letter-spacing:var(--tracking-wide);">СТРОИМ БУДУЩЕЕ БИШКЕКА.</div>
+      </div>
+      <div style="display:flex;gap:48px;flex-wrap:wrap;">
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <a href="#projects" style="font-size:var(--text-body-sm);color:var(--ink-150);" style-hover="color:var(--lime-500);">Проекты</a>
+          <a href="#process" style="font-size:var(--text-body-sm);color:var(--ink-150);" style-hover="color:var(--lime-500);">Процесс</a>
+          <a href="#team" style="font-size:var(--text-body-sm);color:var(--ink-150);" style-hover="color:var(--lime-500);">О нас</a>
+          <a href="#cta" style="font-size:var(--text-body-sm);color:var(--ink-150);" style-hover="color:var(--lime-500);">Контакты</a>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <a href="#" style="font-size:var(--text-body-sm);color:var(--ink-150);" style-hover="color:var(--lime-500);">Instagram</a>
+          <a href="#" style="font-size:var(--text-body-sm);color:var(--ink-150);" style-hover="color:var(--lime-500);">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+    <div style="height:1px;background:var(--border-hairline-inverse);margin-bottom:24px;"></div>
+    <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:var(--text-caption);color:var(--ink-500);">
+      <div>Бишкек, Кыргызстан · основана в 2012</div>
+      <div>© 2026 TAMYR</div>
+    </div>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { revealed: {}, accordionOpen: null, processStep: 0, counters: { years: 0, projects: 0, directions: 0 } };
+
+  componentDidMount() {
+    this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.initCalculator();
+    this.initCarousel();
+    // grab the timelapse video directly rather than trusting the ref
+    // binding alone — this always runs, regardless of how/whether the
+    // template's ref="{{ videoRef }}" resolves.
+    if (!this._video) this._video = document.querySelector('#process video');
+    if (this._video) {
+      const v = this._video;
+      v.muted = true;
+      v.volume = 0;
+      v.addEventListener('loadedmetadata', () => { v.pause(); });
+      // Scrubbing needs to seek freely to any point in the file, which
+      // depends on the server answering HTTP Range requests (206). Plain
+      // static servers (e.g. `python -m http.server`) don't, and just
+      // resend the whole file from byte 0 for every seek — so instead of
+      // seeking a network-backed <video src>, fetch it once into a Blob
+      // and point the video at that; then every seek is instant and
+      // entirely local, no server involved at all.
+      fetch(v.currentSrc || v.src)
+        .then((r) => r.blob())
+        .then((blob) => {
+          v.src = URL.createObjectURL(blob);
+          v.load();
+        })
+        .catch(() => { v.load(); });
+    }
+    this._io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          const id = e.target.dataset.reveal;
+          this.setState((s) => (s.revealed[id] ? null : { revealed: { ...s.revealed, [id]: true } }));
+          if (id === 'numbers') this.startCounters();
+        }
+      });
+    }, { threshold: 0.25 });
+    // the first layout pass can briefly report a collapsed (~1 viewport)
+    // document height before fonts/images settle, which would make every
+    // section look "in view" at once — wait two frames so real geometry
+    // is in place before we start observing, or lazy-loading never lazies.
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      this._layoutReady = true;
+      (this._pending || []).forEach((el) => this._io.observe(el));
+      this._pending = [];
+    }));
+    // Drive everything off a continuous rAF loop rather than the 'scroll'
+    // event: this document scrolls via <body>, not window/documentElement
+    // (an existing quirk of the page), and separately, sampling on every
+    // scroll tick and snapping straight to the target value is what made
+    // the video/parallax feel jerky — polling every frame lets us ease
+    // toward the target instead of jumping to it.
+    // Scrolling itself stays native — hijacking wheel input to hand-roll
+    // momentum (tried, reverted) forces every scroll tick through a
+    // non-passive JS handler plus a manual scrollTop write, which is
+    // real, felt jank on a page this image/video-heavy. Only the ambient
+    // effects (video scrub, parallax, grayscale) get the eased treatment.
+    this._smooth = { heroY: 0, videoTime: 0 };
+    this._rafId = requestAnimationFrame(this.tick);
+    // decorative full-bleed photos carry no information the adjacent
+    // headline doesn't already state — hide them from assistive tech
+    document.querySelectorAll('[style*="background-image"]').forEach((el) => {
+      el.setAttribute('aria-hidden', 'true');
+    });
+  }
+
+  componentWillUnmount() {
+    if (this._rafId) cancelAnimationFrame(this._rafId);
+    if (this._io) this._io.disconnect();
+    if (this._counterRaf) cancelAnimationFrame(this._counterRaf);
+  }
+
+  registerReveal(id) {
+    this._cache = this._cache || {};
+    if (!this._cache[id]) {
+      this._cache[id] = (el) => {
+        if (!el || el.dataset.regDone) return;
+        el.dataset.regDone = '1';
+        el.dataset.reveal = id;
+        if (this._io && this._layoutReady) this._io.observe(el); else (this._pending = this._pending || []).push(el);
+      };
+    }
+    return this._cache[id];
+  }
+
+  setHeroBgRef = (el) => { this._heroBg = el; };
+  setProcessWrapRef = (el) => { this._processWrap = el; };
+  videoRef = (el) => {
+    if (!el) return;
+    this._video = el;
+    el.muted = true;
+    el.volume = 0;
+    // this is a scrubbed video, not ambient playback — currentTime is
+    // driven entirely by scroll position in the tick() loop below. But
+    // nothing else here ever asks the browser to actually fetch the file,
+    // so without an explicit load() the video sits at readyState 0
+    // forever (duration stays NaN) and the poster never changes.
+    el.load();
+    el.addEventListener('loadedmetadata', () => { el.pause(); });
+  };
+
+  initCalculator = (retries) => {
+    const root = document.getElementById('tm-calc');
+    const track = document.getElementById('tm-calc-area-track');
+    if (!root || !track) {
+      if ((retries || 0) < 20) setTimeout(() => this.initCalculator((retries || 0) + 1), 150);
+      return;
+    }
+    const fill = document.getElementById('tm-calc-area-fill');
+    const thumb = document.getElementById('tm-calc-area-thumb');
+    const areaLabel = document.getElementById('tm-calc-area-val');
+    const priceEl = document.getElementById('tm-calc-price');
+    const timelineEl = document.getElementById('tm-calc-timeline');
+    const groups = { type: 42000, floors: 1, finish: 1 };
+    const AREA_MIN = 150, AREA_MAX = 20000, AREA_STEP = 50;
+    let area = 1500;
+
+    const recalc = () => {
+      areaLabel.textContent = area.toLocaleString('ru-RU');
+      const base = groups.type * area * groups.floors * groups.finish;
+      const low = Math.round((base * 0.92) / 100000) * 100000;
+      const high = Math.round((base * 1.08) / 100000) * 100000;
+      priceEl.textContent = low.toLocaleString('ru-RU') + ' – ' + high.toLocaleString('ru-RU') + ' сом';
+      const floorsExtra = groups.floors >= 1.15 ? 4 : groups.floors >= 1.08 ? 2 : 0;
+      const months = Math.max(4, Math.round(6 + area / 1800 + floorsExtra));
+      timelineEl.textContent = '≈ ' + months + ' ' + this.pluralMonths(months) + ' на строительство';
+    };
+
+    root.querySelectorAll('.tm-calc-seg').forEach((seg) => {
+      const group = seg.dataset.group;
+      seg.querySelectorAll('.tm-seg-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          seg.querySelectorAll('.tm-seg-btn').forEach((b) => b.classList.remove('is-active'));
+          btn.classList.add('is-active');
+          groups[group] = parseFloat(btn.dataset.value);
+          recalc();
+        });
+      });
+    });
+
+    // Custom slider, driven entirely by our own pointer-event math rather
+    // than a native <input type="range"> — a plain range input here kept
+    // visually desyncing from its own value (thumb position not matching
+    // what was actually stored), so this sidesteps whatever was causing
+    // that instead of chasing it further.
+    const setArea = (value) => {
+      area = Math.min(AREA_MAX, Math.max(AREA_MIN, Math.round(value / AREA_STEP) * AREA_STEP));
+      const pct = ((area - AREA_MIN) / (AREA_MAX - AREA_MIN)) * 100;
+      fill.style.width = pct + '%';
+      thumb.style.left = pct + '%';
+      track.setAttribute('aria-valuenow', String(area));
+      recalc();
+    };
+    const valueFromPointer = (clientX) => {
+      const rect = track.getBoundingClientRect();
+      const pct = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
+      return AREA_MIN + pct * (AREA_MAX - AREA_MIN);
+    };
+    let dragging = false;
+    track.addEventListener('pointerdown', (e) => {
+      dragging = true;
+      setArea(valueFromPointer(e.clientX));
+      track.focus();
+      // setPointerCapture can throw (e.g. no active pointer registered
+      // for this id yet) — that must never block the value update above,
+      // it's just a nice-to-have so dragging keeps working if the cursor
+      // strays outside the track's own bounds mid-drag.
+      try { track.setPointerCapture(e.pointerId); } catch (err) {}
+    });
+    // move/up listen on window, not just the track, so a drag survives
+    // the cursor straying off this 6px-tall strip even if pointer capture
+    // above didn't take — dragging stays gated by the flag either way.
+    window.addEventListener('pointermove', (e) => {
+      if (dragging) setArea(valueFromPointer(e.clientX));
+    });
+    window.addEventListener('pointerup', () => { dragging = false; });
+    window.addEventListener('pointercancel', () => { dragging = false; });
+    track.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowUp') { setArea(area + AREA_STEP); e.preventDefault(); }
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') { setArea(area - AREA_STEP); e.preventDefault(); }
+    });
+
+    setArea(area);
+  };
+
+  initCarousel = (retries) => {
+    const track = document.getElementById('tm-proj-track');
+    const prevBtn = document.getElementById('tm-proj-prev');
+    const nextBtn = document.getElementById('tm-proj-next');
+    if (!track || !prevBtn || !nextBtn) {
+      if ((retries || 0) < 20) setTimeout(() => this.initCarousel((retries || 0) + 1), 150);
+      return;
+    }
+    const cardWidth = () => {
+      const card = track.querySelector('.tm-proj-card');
+      return card ? card.getBoundingClientRect().width + 20 : track.clientWidth;
+    };
+    const atEnd = () => track.scrollLeft >= track.scrollWidth - track.clientWidth - 4;
+    const updateButtons = () => {
+      prevBtn.disabled = track.scrollLeft <= 4;
+      nextBtn.disabled = atEnd();
+    };
+    const advance = () => {
+      if (atEnd()) track.scrollTo({ left: 0, behavior: 'smooth' });
+      else track.scrollBy({ left: cardWidth(), behavior: 'smooth' });
+    };
+    prevBtn.addEventListener('click', () => { track.scrollBy({ left: -cardWidth(), behavior: 'smooth' }); restartAuto(); });
+    nextBtn.addEventListener('click', () => { advance(); restartAuto(); });
+    track.addEventListener('scroll', updateButtons, { passive: true });
+    window.addEventListener('resize', updateButtons);
+    updateButtons();
+
+    // auto-advance: one card every few seconds, looping back to the
+    // start at the end — paused the moment someone actually engages
+    // with the carousel (hover, touch, or manual drag) so it never
+    // fights a person mid-look or mid-swipe, and off entirely for
+    // reduced-motion since continuous unrequested movement is exactly
+    // what that preference asks pages not to do.
+    let autoTimer = null;
+    const stopAuto = () => { if (autoTimer) { clearInterval(autoTimer); autoTimer = null; } };
+    const startAuto = () => {
+      if (this.reducedMotion || autoTimer) return;
+      autoTimer = setInterval(advance, 4000);
+    };
+    const restartAuto = () => { stopAuto(); startAuto(); };
+    track.addEventListener('mouseenter', stopAuto);
+    track.addEventListener('mouseleave', startAuto);
+    track.addEventListener('pointerdown', stopAuto);
+    track.addEventListener('touchstart', stopAuto, { passive: true });
+    startAuto();
+  };
+
+  pluralMonths = (n) => {
+    const mod10 = n % 10, mod100 = n % 100;
+    if (mod10 === 1 && mod100 !== 11) return 'месяц';
+    if ([2, 3, 4].includes(mod10) && ![12, 13, 14].includes(mod100)) return 'месяца';
+    return 'месяцев';
+  };
+
+  // Eases a smoothed value a fraction of the way toward its target each
+  // frame instead of snapping to it — the standard trick for turning a
+  // stepped, scroll-tick-driven value into something that reads as fluid.
+  static lerp(current, target, factor) {
+    const next = current + (target - current) * factor;
+    return Math.abs(next - target) < 0.0005 ? target : next;
+  }
+
+  tick = () => {
+    const vh = window.innerHeight;
+    const s = this._smooth;
+    const ease = this.reducedMotion ? 1 : 0.08;
+
+    // reads first, batched together, so nothing here forces a synchronous
+    // layout recalculation against a style change made earlier this frame.
+    // Reads from body.scrollTop, not window.scrollY — that's the element
+    // that's actually scrolling on this page (an existing page quirk).
+    const y = Math.max(window.scrollY || 0, document.documentElement.scrollTop || 0, document.body.scrollTop || 0);
+    const processRect = this._processWrap ? this._processWrap.getBoundingClientRect() : null;
+
+    // --- writes: style/video/state updates derived from the reads above
+    if (!this.reducedMotion && this._heroBg) {
+      const targetY = y < vh ? y * 0.18 : s.heroY;
+      s.heroY = Component.lerp(s.heroY, targetY, ease);
+      this._heroBg.style.transform = 'translateY(' + s.heroY.toFixed(1) + 'px)';
+    }
+
+    if (processRect) {
+      const total = processRect.height - vh;
+      const prog = total > 0 ? Math.min(1, Math.max(0, -processRect.top / total)) : 0;
+      const step = Math.min(3, Math.floor(prog * 4));
+      if (step !== this.state.processStep) this.setState({ processStep: step });
+      if (this._video && isFinite(this._video.duration) && this._video.duration > 0) {
+        // scrub: scroll position through the section maps to a frame in
+        // the timelapse (scrolling up plays it backwards), eased so the
+        // picture drifts to the right frame instead of snapping to it
+        const targetTime = prog * this._video.duration;
+        s.videoTime = Component.lerp(s.videoTime, targetTime, ease);
+        // one frame at 24fps is ~0.042s — seeking more often than that
+        // just burns CPU decoding frames nobody can perceive
+        if (Math.abs(this._video.currentTime - s.videoTime) > 0.045) {
+          this._video.currentTime = s.videoTime;
+        }
+      }
+    }
+
+    this._rafId = requestAnimationFrame(this.tick);
+  };
+
+  toggleAccordion = (i) => this.setState((s) => ({ accordionOpen: s.accordionOpen === i ? null : i }));
+
+  startCounters() {
+    if (this._countersStarted) return;
+    this._countersStarted = true;
+    const targets = { years: 12, projects: 27, directions: 4 };
+    const start = performance.now();
+    const dur = this.reducedMotion ? 1 : 1400;
+    const ease = (t) => 1 - Math.pow(1 - t, 3);
+    const step = (now) => {
+      const p = Math.min(1, (now - start) / dur);
+      const e = ease(p);
+      this.setState({ counters: { years: targets.years * e, projects: targets.projects * e, directions: targets.directions * e } });
+      if (p < 1) this._counterRaf = requestAnimationFrame(step);
+    };
+    this._counterRaf = requestAnimationFrame(step);
+  }
+
+  fadeStyle(revealed, delay, extra) {
+    return Object.assign({
+      opacity: revealed ? 1 : 0,
+      transform: revealed ? 'translateY(0px)' : 'translateY(28px)',
+      transition: 'opacity 0.9s var(--ease-out) ' + (delay || 0) + 's, transform 0.9s var(--ease-out) ' + (delay || 0) + 's',
+    }, extra || {});
+  }
+
+  renderVals() {
+    const s = this.state;
+    const rv = (id) => !!s.revealed[id];
+
+    const accordionData = [
+      { n: '01', title: 'ДЕВЕЛОПМЕНТ', desc: 'От концепции до готового объекта.', img: 'uploads/just photo 1.jpeg' },
+      { n: '02', title: 'СТРОИТЕЛЬСТВО', desc: 'Точность, инженерия и исполнение.', img: 'uploads/placeholder 3.jpeg' },
+      { n: '03', title: 'АРХИТЕКТУРА', desc: 'Пространства, продуманные под людей и место.', img: 'uploads/placeholder2 .jpeg' },
+      { n: '04', title: 'УПРАВЛЕНИЕ ПРОЕКТОМ', desc: 'Одна команда. Одно видение. Один результат.', img: 'uploads/team photo.jpeg' },
+    ].map((it, i) => {
+      const open = s.accordionOpen === i;
+      return {
+        n: it.n, title: it.title, desc: it.desc, open,
+        onClick: () => this.toggleAccordion(i),
+        titleColorStyle: { fontFamily: 'var(--font-display)', fontWeight: 700, fontSize: 'var(--text-display-sm)', letterSpacing: 'var(--tracking-tight)', color: open ? 'var(--lime-500)' : 'var(--cream-300)', transition: 'color 0.3s var(--ease-out)' },
+        iconStyle: { display: 'inline-flex', color: 'var(--cream-300)', transform: open ? 'rotate(45deg)' : 'rotate(0deg)', transition: 'transform 0.3s var(--ease-out)' },
+        imgStyle: { width: 160, height: 110, borderRadius: 'var(--radius-md)', overflow: 'hidden', backgroundImage: "url('" + it.img + "')", backgroundSize: 'cover', backgroundPosition: 'center' },
+      };
+    });
+
+    const processSteps = ['ГРУНТ|Каждый проект начинается с земли под ним.', 'ФУНДАМЕНТ|Точность начинается под поверхностью.', 'КАРКАС|Сталь. Бетон. Инженерия.', 'ЗАВЕРШЕНИЕ|От стройплощадки до архитектуры.'].map((row, i) => {
+      const parts = row.split('|');
+      const active = s.processStep === i;
+      return { n: '0' + (i + 1), title: parts[0], desc: parts[1], style: { position: 'absolute', inset: 0, opacity: active ? 1 : 0, transform: active ? 'translateY(0px)' : 'translateY(16px)', transition: 'opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out)', pointerEvents: active ? 'auto' : 'none' } };
+    });
+
+    return {
+      heroBgRef: this.setHeroBgRef,
+      videoRef: this.videoRef,
+
+      introRef: this.registerReveal('intro'),
+      introStyle: this.fadeStyle(rv('intro'), 0, { maxWidth: 'var(--content-max)', margin: '0 auto', display: 'grid', gridTemplateColumns: 'auto 1fr', gap: 'clamp(24px,5vw,64px)', alignItems: 'start' }),
+
+      processWrapRef: (el) => { this.setProcessWrapRef(el); this.registerReveal('process')(el); },
+      processSteps,
+
+      bridgeRef: this.registerReveal('bridge'),
+      bridgeStyle: this.fadeStyle(rv('bridge'), 0, { maxWidth: 'var(--content-max)', margin: '0 auto', display: 'grid', gridTemplateColumns: 'auto 1fr', gap: 'clamp(24px,5vw,64px)', alignItems: 'start' }),
+
+      featuredRef: this.registerReveal('featured'),
+      featuredStyle: this.fadeStyle(rv('featured'), 0, { position: 'relative', height: '92vh', maxWidth: 'var(--content-max)', margin: '0 auto', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '0 clamp(20px,4vw,48px) clamp(56px,7vw,96px)', boxSizing: 'border-box' }),
+      featuredBgStyle: { position: 'absolute', inset: 0, backgroundImage: rv('featured') || rv('process') ? "url('uploads/project2.jpeg')" : 'none', backgroundColor: 'var(--ink-950)', backgroundSize: 'cover', backgroundPosition: 'center', transform: rv('featured') ? 'scale(1)' : 'scale(1.08)', transition: 'transform 1.8s var(--ease-out)' },
+
+      projectsRef: this.registerReveal('projects'),
+      projectsStyle: this.fadeStyle(rv('projects'), 0, { maxWidth: 'min(1120px, 100%)', margin: '0 auto 0 0' }),
+      project1PhotoStyle: { width: '100%', height: '100%', backgroundColor: 'var(--ink-950)', backgroundImage: (rv('featured') || rv('projects')) ? "url('uploads/project1.jpeg')" : 'none', backgroundSize: 'cover', backgroundPosition: 'center', transform: 'scale(var(--imgScale))', transition: 'transform 0.7s var(--ease-out)' },
+      project2PhotoStyle: { width: '100%', height: '100%', backgroundColor: 'var(--ink-950)', backgroundImage: (rv('featured') || rv('projects')) ? "url('uploads/project 4.jpeg')" : 'none', backgroundSize: 'cover', backgroundPosition: 'center', transform: 'scale(var(--imgScale))', transition: 'transform 0.7s var(--ease-out)' },
+      project3PhotoStyle: { width: '100%', height: '100%', backgroundColor: 'var(--ink-950)', backgroundImage: (rv('featured') || rv('projects')) ? "url('uploads/bishkek photo.jpeg')" : 'none', backgroundSize: 'cover', backgroundPosition: 'center', transform: 'scale(var(--imgScale))', transition: 'transform 0.7s var(--ease-out)' },
+      project4PhotoStyle: { width: '100%', height: '100%', backgroundColor: 'var(--ink-950)', backgroundImage: (rv('featured') || rv('projects')) ? "url('uploads/just photo 1.jpeg')" : 'none', backgroundSize: 'cover', backgroundPosition: 'center', transform: 'scale(var(--imgScale))', transition: 'transform 0.7s var(--ease-out)' },
+      project5PhotoStyle: { width: '100%', height: '100%', backgroundColor: 'var(--ink-950)', backgroundImage: (rv('featured') || rv('projects')) ? "url('uploads/project1.jpeg')" : 'none', backgroundSize: 'cover', backgroundPosition: 'center', transform: 'scale(var(--imgScale))', transition: 'transform 0.7s var(--ease-out)' },
+      project6PhotoStyle: { width: '100%', height: '100%', backgroundColor: 'var(--ink-950)', backgroundImage: (rv('featured') || rv('projects')) ? "url('uploads/project2.jpeg')" : 'none', backgroundSize: 'cover', backgroundPosition: 'center', transform: 'scale(var(--imgScale))', transition: 'transform 0.7s var(--ease-out)' },
+      project7PhotoStyle: { width: '100%', height: '100%', backgroundColor: 'var(--ink-950)', backgroundImage: (rv('featured') || rv('projects')) ? "url('uploads/hero page BG.jpeg')" : 'none', backgroundSize: 'cover', backgroundPosition: 'center', transform: 'scale(var(--imgScale))', transition: 'transform 0.7s var(--ease-out)' },
+
+      accordionRef: this.registerReveal('accordion'),
+      accordionStyle: this.fadeStyle(rv('accordion'), 0, { maxWidth: 'min(920px, 100%)', margin: '0 auto 0 0' }),
+      accordionData,
+
+      interiorRef: this.registerReveal('interior'),
+      interiorStyle: this.fadeStyle(rv('interior'), 0, { maxWidth: 'var(--content-max)', margin: '0 auto' }),
+      interiorPhotoStyle: { width: '100%', height: '100%', backgroundImage: rv('accordion') ? "url('uploads/interier.jpeg')" : 'none', backgroundColor: 'var(--bg-card, #e7e2d3)', backgroundSize: 'cover', backgroundPosition: 'center', clipPath: rv('interior') ? 'inset(0 0% 0 0)' : 'inset(0 100% 0 0)', transition: 'clip-path 1.1s var(--ease-out)' },
+
+      teamRef: this.registerReveal('team'),
+      teamStyle: this.fadeStyle(rv('team'), 0, { maxWidth: 'var(--content-max)', margin: '0 auto' }),
+      teamPhotoStyle: { width: '100%', height: '100%', backgroundColor: 'var(--bg-card, #e7e2d3)', backgroundImage: (rv('interior') || rv('team')) ? "url('uploads/team photo.jpeg')" : 'none', backgroundSize: 'cover', backgroundPosition: 'center' },
+
+      numbersRef: this.registerReveal('numbers'),
+      numbersStyle: this.fadeStyle(rv('numbers'), 0, { maxWidth: 'var(--content-max)', margin: '0 auto' }),
+      yearsDisplay: Math.round(s.counters.years) + '+',
+      projectsCountDisplay: String(Math.round(s.counters.projects)),
+      directionsDisplay: String(Math.round(s.counters.directions)).padStart(2, '0'),
+
+      valuesRef: this.registerReveal('values'),
+      valuesStyle: this.fadeStyle(rv('values'), 0, { maxWidth: 'var(--content-max)', margin: '0 auto' }),
+      value1PhotoStyle: { position: 'absolute', inset: 0, backgroundColor: 'var(--ink-950)', backgroundImage: (rv('numbers') || rv('values')) ? "url('uploads/placeholder1.jpeg')" : 'none', backgroundSize: 'cover', backgroundPosition: 'center', filter: 'grayscale(var(--imgGray))', transform: 'scale(var(--imgScale))', transition: 'filter 0.6s var(--ease-out),transform 0.6s var(--ease-out)' },
+      value2PhotoStyle: { position: 'absolute', inset: 0, backgroundColor: 'var(--ink-950)', backgroundImage: (rv('numbers') || rv('values')) ? "url('uploads/placeholder2 .jpeg')" : 'none', backgroundSize: 'cover', backgroundPosition: 'center', filter: 'grayscale(var(--imgGray))', transform: 'scale(var(--imgScale))', transition: 'filter 0.6s var(--ease-out),transform 0.6s var(--ease-out)' },
+      value3PhotoStyle: { position: 'absolute', inset: 0, backgroundColor: 'var(--ink-950)', backgroundImage: (rv('numbers') || rv('values')) ? "url('uploads/placeholder 3.jpeg')" : 'none', backgroundSize: 'cover', backgroundPosition: 'center', filter: 'grayscale(var(--imgGray))', transform: 'scale(var(--imgScale))', transition: 'filter 0.6s var(--ease-out),transform 0.6s var(--ease-out)' },
+
+      ctaRef: this.registerReveal('cta'),
+      ctaStyle: this.fadeStyle(rv('cta'), 0.1, { position: 'relative', minHeight: '90vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '32px', maxWidth: 'var(--content-max)', margin: '0 auto', padding: '0 clamp(20px,4vw,48px)', boxSizing: 'border-box' }),
+      ctaBgStyle: { position: 'absolute', inset: 0, backgroundImage: rv('values') ? "url('uploads/CTA page bg.jpeg')" : 'none', backgroundColor: 'var(--ink-950)', backgroundSize: 'cover', backgroundPosition: 'center', transform: rv('cta') ? 'scale(1)' : 'scale(1.12)', transition: 'transform 2s var(--ease-out)' },
+      ctaOverlayStyle: { position: 'absolute', inset: 0, background: rv('cta') ? 'linear-gradient(180deg, rgba(18,20,15,0.4) 0%, rgba(18,20,15,0.78) 100%)' : 'linear-gradient(180deg, rgba(18,20,15,0.15) 0%, rgba(18,20,15,0.4) 100%)', transition: 'background 1.6s var(--ease-out)' },
+    };
+  }
+}
+</script>
+</body>
+</html>

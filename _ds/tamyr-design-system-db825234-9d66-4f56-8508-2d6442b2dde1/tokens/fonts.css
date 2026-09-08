@@ -1,0 +1,13 @@
+/* No brand font files were supplied with this project (source material was a single
+   marketing screenshot, not a codebase/Figma file). Familjen Grotesk + Karla were chosen
+   as the nearest-spirit open pairing (OFL-licensed) and are self-hosted here via Fontsource's
+   jsDelivr CDN — real @font-face rules with real font-file URLs, not a Google Fonts @import.
+   Flag: if real brand fonts exist, drop the .woff2 files into tokens/fonts/ and point these
+   src: url(...) at them instead. */
+@font-face{font-family:'Familjen Grotesk';font-style:normal;font-weight:500;font-display:swap;src:url('https://cdn.jsdelivr.net/fontsource/fonts/familjen-grotesk@latest/latin-500-normal.woff2') format('woff2');}
+@font-face{font-family:'Familjen Grotesk';font-style:normal;font-weight:600;font-display:swap;src:url('https://cdn.jsdelivr.net/fontsource/fonts/familjen-grotesk@latest/latin-600-normal.woff2') format('woff2');}
+@font-face{font-family:'Familjen Grotesk';font-style:normal;font-weight:700;font-display:swap;src:url('https://cdn.jsdelivr.net/fontsource/fonts/familjen-grotesk@latest/latin-700-normal.woff2') format('woff2');}
+@font-face{font-family:'Karla';font-style:normal;font-weight:400;font-display:swap;src:url('https://cdn.jsdelivr.net/fontsource/fonts/karla@latest/latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'Karla';font-style:normal;font-weight:500;font-display:swap;src:url('https://cdn.jsdelivr.net/fontsource/fonts/karla@latest/latin-500-normal.woff2') format('woff2');}
+@font-face{font-family:'Karla';font-style:normal;font-weight:600;font-display:swap;src:url('https://cdn.jsdelivr.net/fontsource/fonts/karla@latest/latin-600-normal.woff2') format('woff2');}
+@font-face{font-family:'Karla';font-style:normal;font-weight:700;font-display:swap;src:url('https://cdn.jsdelivr.net/fontsource/fonts/karla@latest/latin-700-normal.woff2') format('woff2');}
